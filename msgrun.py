@@ -41,8 +41,7 @@ middle = "(%s, %s, %s)"
 query = header + middle
 
 usernameUsed = ''
-#!!!update your NickName!!!
-searchNickName='XXXXX'
+searchNickName='XXXXXX'
 
 requestcmd='detail'
 
@@ -56,26 +55,29 @@ def sina():
         firstTime = True
         while True:
                 
-
-            options = webdriver.ChromeOptions()
-            options.add_argument("--headless")
-            driver = webdriver.Chrome(chrome_options = options, executable_path = '/usr/bin/chromedriver')
-            driver.implicitly_wait(30)
-            driver.maximize_window()
-            
-            driver.implicitly_wait(10)
-            # driver.maximize_window()
-            driver.set_page_load_timeout(30)
             try:
+                options = webdriver.ChromeOptions()
+                options.add_argument("--headless")
+                driver = webdriver.Chrome(chrome_options = options, executable_path = '/usr/bin/chromedriver')
+                driver.implicitly_wait(30)
+                driver.maximize_window()
+                
+                driver.implicitly_wait(10)
+                # driver.maximize_window()
+                driver.set_page_load_timeout(30)
+            
                 driver.get(url)
                 checkTime = time.time()
                 # sroll_multi(driver)
                 data_secs = driver.find_elements_by_xpath('//*[@id="liveList01"]/div')
-            except TimeoutException:
+            except :
                 print('timeout11...')
                 #driver.execute_script('window.stop()')
-                driver.close()
-                continue
+                try: 
+                    driver.close()
+                    continue
+                except :
+                    continue
             
             for data_sec in data_secs:
                     try: 
